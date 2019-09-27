@@ -1,0 +1,14 @@
+/* css representation example */
+
+#success-page {
+    background-color: lightgreen;
+}
+
+#failure-page{
+    background-color: lightpink;
+}
+
+body{
+    padding-top: 10%;
+    height: 100%;
+}
