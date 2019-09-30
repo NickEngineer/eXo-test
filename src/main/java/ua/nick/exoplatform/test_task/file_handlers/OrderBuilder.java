@@ -1,14 +1,12 @@
-package ua.nick.eXoPlatform.testTask.FileHandlers;
+package ua.nick.exoplatform.test_task.file_handlers;
 
 import javax.servlet.ServletContext;
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -24,7 +22,6 @@ public class OrderBuilder {
         boolean result = false;
 
         StringBuilder orderPathBuilder = new StringBuilder();
-        Date date = new Date();
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss-SSS");
 
@@ -34,11 +31,11 @@ public class OrderBuilder {
 
         orderPathBuilder.append(servletContext.getRealPath("/"));
         orderPathBuilder.append("..");
-        orderPathBuilder.append(File.separator);
+        orderPathBuilder.append(File.separatorChar);
         orderPathBuilder.append("..");
-        orderPathBuilder.append(File.separator);
+        orderPathBuilder.append(File.separatorChar);
         orderPathBuilder.append("data");
-        orderPathBuilder.append(File.separator);
+        orderPathBuilder.append(File.separatorChar);
         orderPathBuilder.append("order-");
         orderPathBuilder.append(dateString);
         orderPathBuilder.append(".csv");
@@ -51,7 +48,7 @@ public class OrderBuilder {
         //check correct saving of the order
         StringBuilder orderValidation = new StringBuilder();
 
-        for(String line:  Files.readAllLines(file)){
+        for (String line : Files.readAllLines(file)) {
             orderValidation.append(line);
             orderValidation.append("\n");
         }

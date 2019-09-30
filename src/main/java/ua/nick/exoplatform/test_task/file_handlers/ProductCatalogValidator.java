@@ -1,11 +1,9 @@
-package ua.nick.eXoPlatform.testTask.FileHandlers;
+package ua.nick.exoplatform.test_task.file_handlers;
 
-import ua.nick.eXoPlatform.testTask.Model.Product;
-import ua.nick.eXoPlatform.testTask.Model.ProductCatalog;
+import ua.nick.exoplatform.test_task.model.Product;
 
 import javax.servlet.ServletContext;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Set;
 import java.util.TimerTask;
 
@@ -13,13 +11,15 @@ import java.util.TimerTask;
 public class ProductCatalogValidator extends TimerTask {
 
     private String dataPath = null;
-    private Class syncronizer = null;
+    private ServletContext servletContext = null;
     private Map<String, Product> oldProductCatalog = null;
 
     @Override
     public void run() {
+
         Map<String, Product> loadedProductCatalog
-                = ResourceFile.loadCatalog(dataPath, syncronizer);
+                = ResourceFile.loadCatalog(dataPath, servletContext);
+
 
         Set<String> oldKeys = oldProductCatalog.keySet();
 
@@ -39,9 +39,9 @@ public class ProductCatalogValidator extends TimerTask {
         }
     }
 
-    public ProductCatalogValidator(String dataPath, Class syncronizer, Map<String, Product> oldProductCatalog) {
+    public ProductCatalogValidator(String dataPath, ServletContext servletContext, Map<String, Product> oldProductCatalog) {
         this.dataPath = dataPath;
-        this.syncronizer = syncronizer;
+        this.servletContext = servletContext;
         this.oldProductCatalog = oldProductCatalog;
     }
 }

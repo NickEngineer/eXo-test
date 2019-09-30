@@ -1,7 +1,7 @@
-package ua.nick.eXoPlatform.testTask.Servlets.ShopServlets;
+package ua.nick.exoplatform.test_task.servlets.shop_servlets;
 
-import ua.nick.eXoPlatform.testTask.Model.Product;
-import ua.nick.eXoPlatform.testTask.Model.ProductCatalog;
+import ua.nick.exoplatform.test_task.model.Product;
+import ua.nick.exoplatform.test_task.model.ProductCatalog;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -42,6 +42,6 @@ public class BasketServlet extends HttpServlet {
 
         request.setAttribute("products", goodsItemsRepresentation);
 
-        request.getRequestDispatcher("/jspPages/basket.jsp").forward(request, response);
+        request.getRequestDispatcher("/jspPages/basket.jsp").include(request, response);
     }
 }

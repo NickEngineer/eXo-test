@@ -2,10 +2,8 @@ table {
     width: 100%;
     text-align: left;
     padding-left: inherit;
-    margin-left: 10%;
-    margin-right: 10%;
     margin-top: 10%;
-    padding-right: 10%;
+    /*padding-right: 10%;*/
 }
 
 
@@ -22,6 +20,7 @@ table {
     border-radius: 6px;
     display: inline-block;
     transition: all 0.3s ease 0s;
+    margin-left: -10%;
 }
 
 .button-cont:hover {
@@ -67,4 +66,9 @@ tr:hover {
     text-align: center;
     font-size: -webkit-xxx-large;
     text-shadow: 0px 0px 20px black;
+}
+
+.content-container{
+    padding-left: 10%;
+    padding-right: 10%;
 }

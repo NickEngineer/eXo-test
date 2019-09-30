@@ -1,8 +1,10 @@
-package ua.nick.eXoPlatform.testTask.Servlets.BuyServlets;
+package ua.nick.exoplatform.test_task.servlets.buy_servlets;
 
-import ua.nick.eXoPlatform.testTask.FileHandlers.OrderBuilder;
-import ua.nick.eXoPlatform.testTask.Model.Product;
-import ua.nick.eXoPlatform.testTask.Model.ProductCatalog;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import ua.nick.exoplatform.test_task.file_handlers.OrderBuilder;
+import ua.nick.exoplatform.test_task.model.Product;
+import ua.nick.exoplatform.test_task.model.ProductCatalog;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +16,9 @@ import java.util.Map;
 
 @WebServlet(name = "BuyServiceServlet", urlPatterns = "/buyservice")
 public class BuyServiceServlet extends HttpServlet {
+
+    private static final Logger LOGGER = LogManager.getLogger(BuyServiceServlet.class.getName()); // logger log4j2
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             String itemsString = request.getParameter("selectedGoods");
@@ -36,6 +41,7 @@ public class BuyServiceServlet extends HttpServlet {
                         orderBuilder.append(product.getPrice());
                         orderBuilder.append("\n");
                     } else {
+                        LOGGER.warn("There is no a product in the product collection");
                         response.setStatus(400);
                         return;
                     }
@@ -48,12 +54,15 @@ public class BuyServiceServlet extends HttpServlet {
                 addOrderStatus = order.saveOrder(this.getServletContext());
 
                 if (addOrderStatus) {
+                    LOGGER.info("Success order");
                     response.setStatus(201);
                 }
             } else {
+                LOGGER.warn("Items to order are empty");
                 response.setStatus(400);
             }
         } catch (Exception ex) {
+            LOGGER.error("Order error", ex);
             response.setStatus(500);
         }
     }

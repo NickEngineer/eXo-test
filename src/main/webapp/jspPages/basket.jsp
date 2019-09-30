@@ -13,7 +13,7 @@
 
 <c:set var="productsArray" value="${products}"/>
 
-<div class="contentContainer">
+<div class="content-container">
     <h1 class="goods-header">Basket</h1>
 
     <table>

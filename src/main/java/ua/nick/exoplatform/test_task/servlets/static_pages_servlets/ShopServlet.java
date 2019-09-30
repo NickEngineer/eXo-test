@@ -1,7 +1,9 @@
-package ua.nick.eXoPlatform.testTask.Servlets.StaticPagesServlets;
+package ua.nick.exoplatform.test_task.servlets.static_pages_servlets;
 
-import ua.nick.eXoPlatform.testTask.FileHandlers.ResourceFile;
+import ua.nick.exoplatform.test_task.file_handlers.ResourceFile;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,10 +16,10 @@ import java.io.IOException;
 public class ShopServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        File file = new File(
-                getClass().getClassLoader().getResource("pages/shop.html").getFile()
-        );
+        String path = "/WEB-INF/classes/pages/shop.html";
 
-        ResourceFile.printFileIntoResponse(file, response);
+        ServletContext servletContext = getServletContext();
+        RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(path);
+        requestDispatcher.include(request, response);
     }
 }
