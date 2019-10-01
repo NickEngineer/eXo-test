@@ -30,7 +30,6 @@ public class ProductCatalog {
                 String csvDataPath = null;
                 try {
                     csvDataPath = servletContext.getRealPath(CSV_FILE_PATH);
-                    throw new RuntimeException("test");
                 } catch (Exception ex) {
                     LOGGER.error("Csv data path creation error", ex);
                 }
