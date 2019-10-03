@@ -1,6 +1,4 @@
-package ua.nick.exoplatform.test_task.servlets.static_pages_servlets;
-
-import ua.nick.exoplatform.test_task.file_handlers.ResourceFile;
+package ua.nick.exoplatform.testtask.servlets.staticpagesservlets;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -15,19 +13,10 @@ import java.io.*;
 public class HomeServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       /*
-       // possible resource louder
-        File file = new File(
-                getClass().getClassLoader().getResource("pages/home.html").getFile()
-        );
-
-        ResourceFile.printFileIntoResponse(file, response);*/
-
-        String path = "/WEB-INF/classes/pages/home.html";
+        String path = "/WEB-INF/static/pages/home.html";
 
         ServletContext servletContext = getServletContext();
         RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(path);
-        //requestDispatcher.forward(request, response);
-        requestDispatcher.include(request,response);
+        requestDispatcher.include(request, response);
     }
 }

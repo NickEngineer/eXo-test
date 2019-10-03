@@ -5,9 +5,9 @@
 <head>
     <title>Basket</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script type="application/javascript" src="/buildshop/js/basket.js"></script>
+    <script type="application/javascript" src="../js/basket.js"></script>
 
-    <link href="/buildshop/styles/catalog-style.css" rel="stylesheet">
+    <link href="../styles/catalog-style.css" rel="stylesheet">
 </head>
 <body>
 

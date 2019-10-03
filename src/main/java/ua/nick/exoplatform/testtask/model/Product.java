@@ -1,4 +1,4 @@
-package ua.nick.exoplatform.test_task.model;
+package ua.nick.exoplatform.testtask.model;
 
 /*
  * vendorCode it's a type of product, as well as its digital

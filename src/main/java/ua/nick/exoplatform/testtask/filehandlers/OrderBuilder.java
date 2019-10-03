@@ -1,4 +1,4 @@
-package ua.nick.exoplatform.test_task.file_handlers;
+package ua.nick.exoplatform.testtask.filehandlers;
 
 import javax.servlet.ServletContext;
 import java.io.File;
@@ -29,10 +29,7 @@ public class OrderBuilder {
 
         //Timestamp ts = new Timestamp(date.getTime());
 
-        orderPathBuilder.append(servletContext.getRealPath("/"));
-        orderPathBuilder.append("..");
-        orderPathBuilder.append(File.separatorChar);
-        orderPathBuilder.append("..");
+        orderPathBuilder.append(System.getProperty("catalina.base"));
         orderPathBuilder.append(File.separatorChar);
         orderPathBuilder.append("data");
         orderPathBuilder.append(File.separatorChar);

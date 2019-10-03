@@ -1,10 +1,10 @@
-package ua.nick.exoplatform.test_task.servlets.buy_servlets;
+package ua.nick.exoplatform.testtask.servlets.buyservlets;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ua.nick.exoplatform.test_task.file_handlers.OrderBuilder;
-import ua.nick.exoplatform.test_task.model.Product;
-import ua.nick.exoplatform.test_task.model.ProductCatalog;
+import ua.nick.exoplatform.testtask.filehandlers.OrderBuilder;
+import ua.nick.exoplatform.testtask.model.Product;
+import ua.nick.exoplatform.testtask.model.ProductCatalog;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

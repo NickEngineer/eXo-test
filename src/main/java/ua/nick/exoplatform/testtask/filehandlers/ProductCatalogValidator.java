@@ -1,6 +1,6 @@
-package ua.nick.exoplatform.test_task.file_handlers;
+package ua.nick.exoplatform.testtask.filehandlers;
 
-import ua.nick.exoplatform.test_task.model.Product;
+import ua.nick.exoplatform.testtask.model.Product;
 
 import javax.servlet.ServletContext;
 import java.util.Map;
