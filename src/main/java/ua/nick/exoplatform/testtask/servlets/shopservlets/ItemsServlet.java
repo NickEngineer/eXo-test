@@ -25,7 +25,7 @@ public class ItemsServlet extends HttpServlet {
         try {
             request.setAttribute("products", productCatalog.values().toArray());
 
-            request.getRequestDispatcher("/jspPages/shopItems.jsp").include(request, response);
+            request.getRequestDispatcher("/jsp-pages/shop-items.jsp").include(request, response);
         } catch (Exception ex) {
             LOGGER.error("Shop Items error (probably productCatalog is null)", ex);
         }

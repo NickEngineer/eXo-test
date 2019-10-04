@@ -23,37 +23,36 @@ public class ResourceFile {
 
         // copying the data pattern if there is no a csvFile
         if (!csvFile.exists()) {
-            StringBuilder dataFileTemplatePathBuilder = new StringBuilder(100);
-            dataFileTemplatePathBuilder.append(System.getProperty("catalina.base"));
-            dataFileTemplatePathBuilder.append(File.separatorChar);
-            dataFileTemplatePathBuilder.append("webapps");
-            dataFileTemplatePathBuilder.append(File.separatorChar);
-            dataFileTemplatePathBuilder.append(servletContext.getContextPath().substring(1)); // buildshop
-            dataFileTemplatePathBuilder.append(File.separatorChar);
-            dataFileTemplatePathBuilder.append("WEB-INF");
-            dataFileTemplatePathBuilder.append(File.separatorChar);
-            dataFileTemplatePathBuilder.append("static");
-            dataFileTemplatePathBuilder.append(File.separatorChar);
-            dataFileTemplatePathBuilder.append("datapattern");
-            dataFileTemplatePathBuilder.append(File.separatorChar);
-            dataFileTemplatePathBuilder.append("data.csv");
-
-
-            String dataTemplatePath = dataFileTemplatePathBuilder.toString();
-
-            Path source = Paths.get(dataTemplatePath);
             Path destination = Paths.get(filePath);
+            Path folder = Paths.get(filePath.substring(0, filePath.length() - 8));
 
             try {
-                Files.createDirectories(destination);
+                Files.createDirectories(folder);
             } catch (IOException ex) {
                 LOGGER.error("Load data directories creation error", ex);
             }
 
             try {
-                Files.copy(source, destination, StandardCopyOption.REPLACE_EXISTING);
+                Files.createFile(destination);
+            } catch (Exception ex) {
+                LOGGER.error("data.csv file creation error", ex);
+            }
+
+            try {
+                ClassLoader classLoader = servletContext.getClassLoader();
+                InputStream dataPatternInputStream
+                        = classLoader.getResourceAsStream("/datapattern/data.csv");
+
+                byte[] targetDataPatternBuffer = new byte[dataPatternInputStream.available()];
+                dataPatternInputStream.read(targetDataPatternBuffer);
+
+                File targetFile = new File(filePath);
+                OutputStream dataPatternOutputStream = new FileOutputStream(targetFile);
+
+                //write data from the template stream into data.csv
+                dataPatternOutputStream.write(targetDataPatternBuffer);
             } catch (IOException ex) {
-                LOGGER.error("Copying data catalog directory error", ex);
+                LOGGER.error("Copying data catalog from resources error", ex);
             }
 
             csvFile = new File(filePath);

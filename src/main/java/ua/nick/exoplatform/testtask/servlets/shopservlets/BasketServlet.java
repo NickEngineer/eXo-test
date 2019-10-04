@@ -47,7 +47,7 @@ public class BasketServlet extends HttpServlet {
 
             request.setAttribute("products", goodsItemsRepresentation);
 
-            request.getRequestDispatcher("/jspPages/basket.jsp").include(request, response);
+            request.getRequestDispatcher("/jsp-pages/basket.jsp").include(request, response);
         } catch (Exception ex) {
             LOGGER.error("Basket Servlet error", ex);
             request.getRequestDispatcher("/WEB-INF/static/pages/failure.html").include(request, response);
