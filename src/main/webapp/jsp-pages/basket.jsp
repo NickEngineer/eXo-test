@@ -11,24 +11,26 @@
 </head>
 <body>
 
-<c:set var="productsArray" value="${products}"/>
-
 <div class="content-container">
     <h1 class="goods-header">Basket</h1>
 
     <table>
-        <c:forEach items="${products}" var="productLine">
-            <tr id="${productLine[1]}"
-                    <c:if test="${productLine[0] != ''}">
+        <c:forEach items="${productsSelected}" var="product">
+            <tr id="${product.vendorCode}"
+                    <c:if test="${product.name != ''}">
                         class="valid-product"
                     </c:if>
-                    <c:if test="${productLine[0] == ''}">
+                    <c:if test="${product.name == ''}">
                         class="invalid-product"
                     </c:if>
             >
-                <td><span>Product: </span><c:out value="${productLine[0]}"/></td>
-                <td><span>Code: </span><c:out value="${productLine[1]}"/></td>
-                <td><span>Price: </span><c:out value="${productLine[2]}"/></td>
+                <td><span>Product: </span><c:out value="${product.name}"/></td>
+                <td><span>Code: </span><c:out value="${product.vendorCode}"/></td>
+                <td><span>Price: </span>
+                    <c:if test="${product.price > 0}">
+                        <c:out value="${product.price}"/>
+                    </c:if>
+                </td>
             </tr>
         </c:forEach>
     </table>

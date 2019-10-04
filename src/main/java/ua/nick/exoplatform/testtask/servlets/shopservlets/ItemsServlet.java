@@ -17,7 +17,7 @@ import java.util.Map;
 @WebServlet(name = "ItemsServlet", urlPatterns = "/shop/items")
 public class ItemsServlet extends HttpServlet {
 
-    private static final Logger LOGGER = LogManager.getLogger(BuyServiceServlet.class.getName()); // logger log4j2
+    private static final Logger LOGGER = LogManager.getLogger(ItemsServlet.class.getName()); // logger log4j2
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Map<String, Product> productCatalog = ProductCatalog.getCatalog(this.getServletContext());

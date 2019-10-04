@@ -6,15 +6,23 @@ package ua.nick.exoplatform.testtask.model;
  *
  * */
 
+import java.math.BigDecimal;
+
 public class Product {
     private String name;
     private String vendorCode;
-    private int price;
+    private BigDecimal price;
 
-    public Product(String name, String vendorCode, int price) {
+    public Product(String name, String vendorCode, BigDecimal price) {
         this.name = name;
         this.vendorCode = vendorCode;
         this.price = price;
+    }
+
+    public Product(Product product) {
+        this.name = product.getName();
+        this.vendorCode = product.getVendorCode();
+        this.price = product.getPrice();
     }
 
     public String getName() {
@@ -33,11 +41,11 @@ public class Product {
         this.vendorCode = vendorCode;
     }
 
-    public int getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 }

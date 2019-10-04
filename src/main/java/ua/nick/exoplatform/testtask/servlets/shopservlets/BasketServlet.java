@@ -12,12 +12,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.Map;
+import java.util.concurrent.ConcurrentSkipListMap;
 
 @WebServlet(name = "BasketServlet", urlPatterns = "/shop/basket")
 public class BasketServlet extends HttpServlet {
 
-    private static final Logger LOGGER = LogManager.getLogger(BuyServiceServlet.class.getName()); // logger log4j2
+    private static final Logger LOGGER = LogManager.getLogger(BasketServlet.class.getName()); // logger log4j2
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -29,23 +31,19 @@ public class BasketServlet extends HttpServlet {
 
             Product product;
 
-            String[][] goodsItemsRepresentation = new String[codes.length][3];
+            Map<String, Product> productsSelected = new ConcurrentSkipListMap();
 
             for (int i = 0; i < codes.length; ++i) {
-                if (productCatalog.containsKey(codes[i])) {
-                    product = productCatalog.get(codes[i]);
+                product = productCatalog.get(codes[i]);
 
-                    goodsItemsRepresentation[i][0] = product.getName();
-                    goodsItemsRepresentation[i][1] = codes[i];
-                    goodsItemsRepresentation[i][2] = Integer.toString(product.getPrice());
+                if (product != null) {
+                    productsSelected.put(codes[i], new Product(product));
                 } else {
-                    goodsItemsRepresentation[i][0] = "";
-                    goodsItemsRepresentation[i][1] = codes[i];
-                    goodsItemsRepresentation[i][2] = "";
+                    productsSelected.put(codes[i], new Product("", codes[i], new BigDecimal("0")));
                 }
             }
 
-            request.setAttribute("products", goodsItemsRepresentation);
+            request.setAttribute("productsSelected", productsSelected.values().toArray());
 
             request.getRequestDispatcher("/jsp-pages/basket.jsp").include(request, response);
         } catch (Exception ex) {

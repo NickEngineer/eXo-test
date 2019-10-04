@@ -8,6 +8,7 @@ import ua.nick.exoplatform.testtask.model.Product;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.math.BigDecimal;
 import java.nio.file.*;
 import java.util.Map;
 import java.util.concurrent.ConcurrentSkipListMap;
@@ -40,17 +41,23 @@ public class ResourceFile {
 
             try {
                 ClassLoader classLoader = servletContext.getClassLoader();
-                InputStream dataPatternInputStream
-                        = classLoader.getResourceAsStream("/datapattern/data.csv");
 
-                byte[] targetDataPatternBuffer = new byte[dataPatternInputStream.available()];
-                dataPatternInputStream.read(targetDataPatternBuffer);
+                byte[] targetDataPatternBuffer;
+
+                //read data from datapattern into targetDataPatternBuffer
+                try (InputStream dataPatternInputStream
+                             = classLoader.getResourceAsStream("/datapattern/data.csv")) {
+                    targetDataPatternBuffer = new byte[dataPatternInputStream.available()];
+                    dataPatternInputStream.read(targetDataPatternBuffer);
+                }
 
                 File targetFile = new File(filePath);
-                OutputStream dataPatternOutputStream = new FileOutputStream(targetFile);
 
                 //write data from the template stream into data.csv
-                dataPatternOutputStream.write(targetDataPatternBuffer);
+                try (OutputStream dataPatternOutputStream = new FileOutputStream(targetFile)) {
+                    dataPatternOutputStream.write(targetDataPatternBuffer);
+                }
+
             } catch (IOException ex) {
                 LOGGER.error("Copying data catalog from resources error", ex);
             }
@@ -74,7 +81,7 @@ public class ResourceFile {
                     productCatalog.put(lineComponents[1]
                             , new Product(lineComponents[0]
                                     , lineComponents[1]
-                                    , Integer.parseInt(lineComponents[2])
+                                    , new BigDecimal(lineComponents[2])
                             )
                     );
                 } catch (Exception ex) {
